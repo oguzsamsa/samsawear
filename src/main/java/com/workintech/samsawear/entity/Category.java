@@ -13,7 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 @Data
 @Entity
-@Table(name = "product", schema = "ecommerce")
+@Table(name = "category", schema = "ecommerce")
 public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,7 +30,11 @@ public class Category {
     private Gender gender;
 
     @JsonIgnore
-    @OneToMany(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH,CascadeType.REMOVE},
+    @OneToMany(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH},
             mappedBy = "category")
     private List<Product> products = new ArrayList<>();
+
+    public void addProduct(Product product){
+        products.add(product);
+    }
 }
